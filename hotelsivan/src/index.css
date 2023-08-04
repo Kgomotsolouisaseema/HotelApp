@@ -1,0 +1,87 @@
+*{
+  padding:0%;
+  margin: 0;
+}
+
+body{
+  /* background-image: url("./icons/Lobby\ Lounge.jpg"); */
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+.navbar-logo {
+  background-image: url("./icons/HotelLogo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 90px;
+  width: 90px; /* Optional: Set the width if you want to control it separately */
+}
+/* Custom CSS */
+@media (max-width: 767px) {
+  .navbar-nav .nav-link {
+    display: none;
+  }
+
+  .navbar-nav .dropdown-toggle {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-nav {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .navbar-nav .nav-item {
+    margin-right: 15px; /* Adjust the margin as needed */
+  }
+}
+
+
+/* @media{max-width: .navbar-logo;
+  .navbar-logo {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 200px;
+    height: auto;
+  } */
+
+/* } */
+
+.lounge-img {
+  /* background-image: url('./assets/icons/Lobby\ Lounge.jpg'); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 200px;
+}
+
+.facebook-icon {
+  background-image: url('./icons/facebook.png');
+  background-size: cover;
+  background-position: center;
+  
+  width: 30px;
+  height: 30px;
+}
+
+.instagram-icon {
+  background-image: url('./icons/instagram.png');
+  background-size: cover;
+  background-position: center;
+  
+  width: 30px;
+  height: 30px;
+}
+
+.twitter-icon {
+  background-image: url('./icons/twitter.png');
+  background-size: cover;
+  background-position: center;
+  width: 30px;
+  height: 30px;
+}
