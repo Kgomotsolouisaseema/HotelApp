@@ -63,11 +63,7 @@ const Navbar = () => {
             </li>
           </ul>
         </li>
-        <li className="nav-item">
-          <a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true">
-            Lost
-          </a>
-        </li>
+        
       </ul>
       {/* Search form */}
       <form className="d-flex">

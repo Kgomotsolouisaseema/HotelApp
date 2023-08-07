@@ -1,7 +1,4 @@
-*{
-  padding:0%;
-  margin: 0;
-}
+/* CSS FOR THE WHOLE PROJECT */
 
 body{
   /* background-image: url("./icons/Lobby\ Lounge.jpg"); */
@@ -18,38 +15,6 @@ body{
   height: 90px;
   width: 90px; /* Optional: Set the width if you want to control it separately */
 }
-/* Custom CSS */
-@media (max-width: 767px) {
-  .navbar-nav .nav-link {
-    display: none;
-  }
-
-  .navbar-nav .dropdown-toggle {
-    display: block;
-  }
-}
-
-@media (min-width: 768px) {
-  .navbar-nav {
-    flex-direction: row;
-    justify-content: center;
-  }
-  .navbar-nav .nav-item {
-    margin-right: 15px; /* Adjust the margin as needed */
-  }
-}
-
-
-/* @media{max-width: .navbar-logo;
-  .navbar-logo {
-    position: absolute;
-    top: 50px;
-    left: 50px;
-    width: 200px;
-    height: auto;
-  } */
-
-/* } */
 
 .lounge-img {
   /* background-image: url('./assets/icons/Lobby\ Lounge.jpg'); */
@@ -64,24 +29,65 @@ body{
   background-image: url('./icons/facebook.png');
   background-size: cover;
   background-position: center;
-  
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
 }
 
 .instagram-icon {
   background-image: url('./icons/instagram.png');
   background-size: cover;
   background-position: center;
-  
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
 }
 
 .twitter-icon {
   background-image: url('./icons/twitter.png');
   background-size: cover;
   background-position: center;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
 }
+.socials{
+  display: flex;
+  list-style: none;
+
+}
+.socials li{
+  display: inline;
+  margin: 10px;
+
+}
+
+/* Hotel preference text area */
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text {
+  width: 100%;
+  height: 100%;
+}
+/* New Room Form*/
+
+.container-roomform {
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  height: 100%;
+}
+
+.box {
+  max-width: 800px;
+  /* background-color: #0a99b3; */
+  padding: 20px;
+  border: 5px solid #ccc;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
