@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card ,Alert } from "react-bootstrap";
-// import { useAuth } from "../../../context/AuthContext";
-import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "../AuthContext";
+// import { useAuth } from "./_AuthContext__WEBPACK_IMPORTED_MODULE_1__";
 import { Link } from "react-router-dom";
 
 function Registration() {
@@ -58,7 +58,7 @@ function Registration() {
         
       </Card>
       <div className="w-100 text-center mt-2">
-        Already have an account ?  <Link to="/Registration" >Sign Up</Link>
+        Already have an account ?  <Link to="/Login" >Sign Up</Link>
       </div>
     </>
   );

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { db } from "../../firebase";
+import { db } from "./firebase";
 import { getDocs, collection } from "firebase/firestore";
-// import { useCollectionData } from "react-firebase-hooks/firestore";
 import { Carousel } from "react-bootstrap"; // Import Bootstrap's Carousel component
 
 function ClientRooms() {

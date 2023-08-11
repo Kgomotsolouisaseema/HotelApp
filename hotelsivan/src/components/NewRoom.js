@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { db } from "../../firebase";
+import { db } from "./firebase";
 // function from Firebase Storage to get the download URL of an uploaded file.
 import { getDownloadURL } from "firebase/storage";
 // Import collection and addDoc functions from Firebase Firestore to add documents to a collection.
@@ -8,7 +8,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytes } from "firebase/storage";
 
 //importing the initialized storage from the Firebase setup
-import { storage } from "../../firebase";
+import { storage } from "./firebase";
 
 //Importing popups for loading
 import { v4 as uuidv4, v4 } from "uuid"; //Import v4 from the uuid library and use it to randomise characters
@@ -71,17 +71,7 @@ const NewRoom = () => {
           });
           return;
         }
-        // const uploadPromises = subImages.map((subImageFile)=> {
-        //   const subImageName = subImageFile.name +v4();
-        //   const subImageRef = ref(storage , `hotelImages /${roomNum}/${subImageName}`)
-        //   return uploadBytes(subImageRef , subImageFile).then(()=>{
-        //     return getDownloadURL(subImageRef);
-        //   });
-        // });
-        // Promise.all(uploadPromises)
-        // .then((downloadUrls)=>{
-        //   setImageURL(downloadUrls);
-        // })
+        
         const subImageFile = subImages[0]; // Get the first subimage file from the array
         //Generate a uniquie identifier for the subimage
         const subImageName = subImages.name + v4();
@@ -96,9 +86,9 @@ const NewRoom = () => {
         uploadTask.then(() => {
           getDownloadURL(subImageRef).then((url) => {
             //set the subimage URL state
-            // setImageURL(url);
+            setSubImages(url);
             //update the subimage with the URL 
-            setImageURL((prevSubImages)=> [...prevSubImages , url]);
+            // setSubImages((prevSubImages)=> [...prevSubImages , url]);
 
             //Display a success message
             Swal.fire({
@@ -138,16 +128,7 @@ const NewRoom = () => {
         subImages: subImages, //subimage is the object , storing it with url stores the url of the image
       });
       console.log(docRef);
-      // console.log({
-      //   room_type: roomType,
-      //   roomNum: roomNum,
-      //   roomDescription: roomDescription,
-      //   num_Beds: num_Beds,
-      //   price: price,
-      //   totalOccupants: totalOccupants,
-      //   imageURL: imageURL,
-      //   subImages: subImages, //subimage is the object , storing it with url stores the url of the image
-      // });
+     
       // SUCCESS POP-UP
       Swal.fire({
         icon: "success",
@@ -232,6 +213,7 @@ const NewRoom = () => {
         <input
           type="file"
           className="form-control"
+          multiple 
           onChange={(event) => setSubImages([event.target.files[0]])}
         />
         <button className="btn btn-primary" onClick={handleOtherUpload}>
@@ -243,6 +225,6 @@ const NewRoom = () => {
         </button>
       </div>
     </div>
-  );
+  ); 
 };
 export default NewRoom;

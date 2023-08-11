@@ -1,22 +1,22 @@
-
-import React from 'react';
-// import { Router, Route } from 'react-router-dom'; 
-// import { Container } from 'react-bootstrap'; 
-// import AuthProvider from './context/AuthContext'; 
-// import ClientHome from "./components/client/ClientHome";
-import ClientRooms from './components/client/ClientRooms';
-import NewRoom from "./components/admin/NewRoom";  
-import Navbar from './components/NavBar';
-
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from "./components/Home";
+import Rooms from "./components/Rooms";
+import Booking from "./components/Booking";
+import NewRoom from "./components/NewRoom"
 function App() {
   return (
     <div>
-      <Navbar/>
-       {/* <ClientHome /> */}
-      <NewRoom/>
-      {/* <ClientRooms/> */}
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Home/>} />
+          <Route path="/rooms" element={<Rooms/>} />
+          <Route path="/booking" element={<Booking/>} />
+          <Route path="/newrooms" element={<NewRoom/>} />
+
+        </Routes>
+      </Router>
     </div>
- 
   );
 }
 

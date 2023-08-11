@@ -1,6 +1,6 @@
 // GoogleMap.js
 import React from "react";
-import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
+// import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
  //initialized a variable to hold the lat and log om hotel sivan
  //this also includes stylting . 
 const mapContainerStyle = {
