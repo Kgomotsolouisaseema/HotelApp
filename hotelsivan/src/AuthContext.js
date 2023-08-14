@@ -1,58 +1,36 @@
-import React, { useContext, useState, useEffect } from "react";
-import { auth } from './components/firebase';
-import {  createUserWithEmailAndPassword , onAuthStateChanged } from "firebase/auth";
+// import React, { useContext, useState } from 'react';
+// import {auth } from "./components/firebase"
+// import { createUserWithEmailAndPassword } from 'firebase/auth';
+// const AuthContext = React.createContext()
+
+// export function useAuth(){
+//   return useContext(AuthContext)
+// }
 
 
+//  export function AuthProvider( {children}) {
+//   const [currentUser , setcurrentUser]= useState()
 
-const AuthContext = React.createContext();
+//   function login(email,password){
+//     return createUserWithEmailAndPassword(auth , email , password).then(userCredentials=>{
 
-export function useAuth() {
-  return useContext(AuthContext);
-}
-
-export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState();
-  const [loading ,setLoading] = useState(true)
-
-// const auth = getAuth(app);
-
-
-  function signup(email, password) {
-    createUserWithEmailAndPassword(auth,email, password)
+//     }).catch(error=>{
+//       console.log(error)
+//     })
     
-    .then((userCredentials)=>{
-        // signed in 
-        // const user = userCredentials.user;
+//   }
+
+//   const value = {
+//     currentUser
+//   }
+
+//   return (
+//     <AuthContext.Provider value={value}>
+//       {children}
+//     </AuthContext.Provider>
+      
     
-    }).catch((error)=>{
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-    });
-  }
+//   );
+// }
 
-  // the useEffect function that listens for authentication state changes 
-  useEffect(() => {
-    const unsubscriber = onAuthStateChanged(auth,(user) => {
-        setCurrentUser(user);
-        setLoading(false)
-     
-    });
 
-    return unsubscriber;
-  },[]);
-
-  const value = { currentUser, signup };
-
-  return (
-    <div>
-    {/* Render children only when loading is false and authentication status is determined */}
-    {loading ? <p> Loading ... </p> :(
-    <AuthContext.Provider value={value}>
-        {children}
-    </AuthContext.Provider>
-    )}
-    </div>
-  );
-}
-//webdevSimplified 20:25 min
-export default AuthContext;

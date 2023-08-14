@@ -1,57 +1,53 @@
-import React, { useRef, useState } from "react";
-import { Form, Button, Card ,Alert } from "react-bootstrap";
-import { useAuth } from "../../../context/AuthContext";
-import { Link } from "react-router-dom";
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import React from 'react';
+import  {useRef} from 'react';
+import {Card , Form , Button } from  "react-bootstrap"
+import { auth } from './firebase';
 
 
-function Login() {
-    const emailRef = useRef();
-    const passwordRef = useRef();
-    const {signup } = useAuth();
-    const [error,setError] = useState(" ")
-    const [loading ,setLoading] = useState(false)
+function Login({setUserEmail }) {
 
-    //this async function handles the password and email and confirmation of passwords if they match
-    async function handleSubmit(e){
-        e.preventDefault()
+  const emailRef = useRef()
+  const passwordRef= useRef()
+  const passwordconfirmRef = useRef()
 
-        try{
-            setError(" ")          //sets our error to empty string 
-            setLoading(true)
-         await signup(emailRef.current.value , passwordRef.current.value) 
-        }catch(error){
-            console.log(error)
-            setError("did not create account")
-        }
-        setLoading(false)
-    }
+
+   async function handlesubmit(e){
+    e.preventDefault()
+    console.log(emailRef , passwordRef)
+    return createUserWithEmailAndPassword(auth , emailRef.current.value , passwordRef.current.value).then(userCredentials=>{
+      console.log(userCredentials)
+      setUserEmail(userCredentials.user.email) 
+    }).catch(error=>{
+      console.log(error.message)
+    })
+    
+  }
   return (
     <>
-      <Card>
-        <Card.Body>
-        <div className="w-100" style={{ maxWidth: "400px" }}>
-          <h2 className="text-center mb-4">Log In</h2>
-          {/* {currentuser && currentuser.email} */}
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
-            </Form.Group>
-            <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
-            </Form.Group>
-            
-            <Button disabled={loading} className="w-100" type="submit">Log In</Button> 
-          </Form>
-          </div>
-        </Card.Body>
-        
-      </Card>
-      <div className="w-100 text-center mt-2">
-        Need  an account ? <Link to="#" >Sign Up</Link>
-      </div>
+    <Card>
+      <Card.Body>
+        <h2 className='text-center'>Sign Up</h2>
+        <Form>
+          <Form.Group id='email'>
+            <Form.Label>Email</Form.Label>
+            <Form.Control type='email' ref={emailRef} required />
+          </Form.Group>
+          <Form.Group id='password'>
+            <Form.Label>Password</Form.Label>
+            <Form.Control type='password' ref={passwordRef} required />
+          </Form.Group>
+          <Form.Group id='confirmpassword'>
+            <Form.Label>Password Confirmation </Form.Label>
+            <Form.Control type='password' ref={passwordconfirmRef} required />
+          </Form.Group>
+          <Button className='w-100' type="submit" onClick={handlesubmit}>Sign Up</Button>
+        </Form>
+      </Card.Body>
+    </Card>
+    <div className='w-100 text-center mt-2'>
+      Already have an account ? Log In
+    </div>
     </>
   );
 }

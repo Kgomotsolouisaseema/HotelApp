@@ -24,7 +24,9 @@ const NewRoom = () => {
   const [imageUpload, setImageUpload] = useState(null);
   const [roomNum, setRoomNum] = useState("");
   const [imageURL, setImageURL] = useState("");
+  //2 states for other images
   const [subImages, setSubImages] = useState([]);
+  const [uploadedImages, setUploadedImages] = useState([])
 
   //function to upload all room images to firestore to the Firebase storage cloud
   const handleUpload = () => {
@@ -59,7 +61,8 @@ const NewRoom = () => {
   };
     //FUNTCION TO HANDLE Sub Images in the rooms gallery
 
-    function handleOtherUpload() {
+    async function handleOtherUpload() {
+      const imageUrlArray =[];
       try {
         if (subImages.length === 0) {
           Swal.fire({
@@ -71,36 +74,35 @@ const NewRoom = () => {
           });
           return;
         }
-        
-        const subImageFile = subImages[0]; // Get the first subimage file from the array
-        //Generate a uniquie identifier for the subimage
-        const subImageName = subImages.name + v4();
-        //create a reference to the subimage in the firebase storage
-        const subImageRef = ref(
-          storage,
-          `hotelImages/${roomNum}/${subImageName} `
-        );
-        //upload the subimage to firebase storage
-        const uploadTask = uploadBytes(subImageRef, subImageFile);
-        //set un eventListener to get the download URL when the upload is complete
-        uploadTask.then(() => {
-          getDownloadURL(subImageRef).then((url) => {
-            //set the subimage URL state
-            setSubImages(url);
-            //update the subimage with the URL 
-            // setSubImages((prevSubImages)=> [...prevSubImages , url]);
-
-            //Display a success message
-            Swal.fire({
-              icon: "success",
-              title: "Uploaded!",
-              text: "Image has been uploaded.",
-              showConfirmButton: false,
-              timer: 2000,
+        console.log('image: ', subImages);
+        for(let image of subImages ){
+          const id = uuidv4();
+          const metadata ={
+            constentType : 'image/png'
+          };
+          console.log(image);
+          const subImageRef = ref(storage, `hotelImages/${roomNum}/${id} `);
+          const uploadTask = uploadBytes(subImageRef, image);
+          uploadTask.then(async() => {
+           await getDownloadURL(subImageRef).then((url) => {
+              //  imageUrlArray.push(url)
+              setUploadedImages(images => [...images, url])
+  
+              //Display a success message
+              Swal.fire({
+                icon: "success",
+                title: "Uploaded!",
+                text: "Image has been uploaded.",
+                showConfirmButton: false,
+                timer: 2000,
+              });
             });
           });
-        });
+        }
+      
+      
       } catch (error) {
+        console.log(error);
         Swal.fire({
           icon: "error",
           title: "Error!",
@@ -114,7 +116,8 @@ const NewRoom = () => {
 
   const handleNewRoom = async (e) => {
     e.preventDefault();
-    //FUNCTION TO STORE DATA TO FIREBASE ,  this stores all the information that comes with the room type .
+    console.log(uploadedImages)
+    // //FUNCTION TO STORE DATA TO FIREBASE ,  this stores all the information that comes with the room type .
     try {
 
       const docRef = await addDoc(collection(db, "roomTypes"), {
@@ -125,9 +128,12 @@ const NewRoom = () => {
         price: price,
         totalOccupants: totalOccupants,
         imageURL: imageURL,
-        subImages: subImages, //subimage is the object , storing it with url stores the url of the image
+        uploadedImages : uploadedImages
+         //subimage is the object , storing it with url stores the url of the image
       });
       console.log(docRef);
+      setUploadedImages([]);
+      
      
       // SUCCESS POP-UP
       Swal.fire({
@@ -198,6 +204,7 @@ const NewRoom = () => {
           placeholder="Number of occupants"
           onChange={(event) => setTotalOccupants(event.target.value)}
         />
+        <br/>
 
         <label>Insert Main Image: </label>
         <input
@@ -208,17 +215,19 @@ const NewRoom = () => {
         <button className="btn btn-primary" onClick={handleUpload}>
           UPLOAD
         </button>
-
+        <br/>
         <label>Insert Sub Room Images: </label>
         <input
           type="file"
           className="form-control"
           multiple 
-          onChange={(event) => setSubImages([event.target.files[0]])}
+          onChange={(event) => setSubImages(event.target.files)}
         />
+      
         <button className="btn btn-primary" onClick={handleOtherUpload}>
           UPLOAD
         </button>
+        <br />
 
         <button className="btn btn-success" onClick={handleNewRoom}>
           SAVE NEW ROOM

@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import { getDocs, collection } from "firebase/firestore";
 import { Carousel } from "react-bootstrap"; // Import Bootstrap's Carousel component
+import { useNavigate } from "react-router-dom";
 
 function ClientRooms() {
   // Fetch the 'roomTypes' collection data from Firestore
   const [rooms  ,setRooms] = useState([]);
+  const navigate = useNavigate();
  
 
   // Organize rooms into separate arrays based on their room types
@@ -18,10 +20,11 @@ function ClientRooms() {
     // Function to fetch room data from Firestore
     const fetchRooms = async () => {
       try {
-       
+ 
         const roomSnapshot = await getDocs(collection(db, "roomTypes"));
         const roomData = roomSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        console.log(roomSnapshot); //see on console what is happening when comp monuts
+        
+        console.log(roomData); //see on console what is happening when comp monuts
         setRooms(roomData);
       } catch (error) {
         console.log("Error fetching rooms: ", error);
@@ -30,6 +33,14 @@ function ClientRooms() {
 
     fetchRooms(); // Call the fetchRooms function when the component mounts
   }, []);
+
+  //Book the room 
+  const handleBooking = id => {
+    const [room] = rooms.filter(room => room.id === id);
+    console.log("room data:", room);
+    navigate('/booking', { state: { room: room } });
+}
+
 
   return (
     <div>
@@ -56,6 +67,7 @@ function ClientRooms() {
               <div className="card-body">
                 <h5 className="card-title">Economy Room {room.roomNum}</h5>
                 <p className="card-text">{room.roomDescription}</p>
+                <button className="btn-checkRoom" onClick={()=> handleBooking(room.id , room.value)}>Book Room </button>
               </div>
             </div>
           </div>
@@ -86,6 +98,7 @@ function ClientRooms() {
               <div className="card-body">
                 <h5 className="card-title">Standard Room {room.roomNum}</h5>
                 <p className="card-text">{room.roomDescription}</p>
+                <button className="btn-checkRoom" onClick={()=> handleBooking(room.id , room.value)}>Book Room </button>
               </div>
             </div>
           </div>
@@ -113,6 +126,7 @@ function ClientRooms() {
               <div className="card-body">
                 <h5 className="card-title">Deluxe Room {room.roomNum}</h5>
                 <p className="card-text">{room.roomDescription}</p>
+                <button className="btn-checkRoom" onClick={()=> handleBooking(room.id , room.value)}>Book Room </button>
               </div>
             </div>
             
