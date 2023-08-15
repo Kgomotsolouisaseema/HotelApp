@@ -62,7 +62,7 @@ const NewRoom = () => {
     //FUNTCION TO HANDLE Sub Images in the rooms gallery
 
     async function handleOtherUpload() {
-      const imageUrlArray =[];
+      // const imageUrlArray =[];
       try {
         if (subImages.length === 0) {
           Swal.fire({

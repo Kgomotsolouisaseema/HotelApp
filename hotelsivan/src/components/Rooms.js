@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 function ClientRooms() {
   // Fetch the 'roomTypes' collection data from Firestore
   const [rooms  ,setRooms] = useState([]);
+  
   const navigate = useNavigate();
- 
 
   // Organize rooms into separate arrays based on their room types
   const economyRooms = rooms.filter((room) => room.room_type === "Economy");
@@ -34,12 +34,19 @@ function ClientRooms() {
     fetchRooms(); // Call the fetchRooms function when the component mounts
   }, []);
 
-  //Book the room 
-  const handleBooking = id => {
-    const [room] = rooms.filter(room => room.id === id);
-    console.log("room data:", room);
-    navigate('/booking', { state: { room: room } });
-}
+  //Book the room button on every individual room 
+  //HAMDLE BOOKING FUNCTION WHIC TAKES ID AS PARAMETER 
+//   function handleBooking (id){
+//   const filteredRooms = rooms.filter(function(room){
+  
+//     return room.id ===id;
+//   })
+//   const room = filteredRooms[0];
+
+//   console.log("room data:" , room);
+//   navigate('/booking' , {state: {room : room} });
+//   console.log(room);
+// }
 
 
   return (
@@ -67,7 +74,7 @@ function ClientRooms() {
               <div className="card-body">
                 <h5 className="card-title">Economy Room {room.roomNum}</h5>
                 <p className="card-text">{room.roomDescription}</p>
-                <button className="btn-checkRoom" onClick={()=> handleBooking(room.id , room.value)}>Book Room </button>
+                {/* <button className="btn-checkRoom" onClick={()=> handleBooking(room.id , room.value)}>Book Room </button> */}
               </div>
             </div>
           </div>
@@ -82,23 +89,19 @@ function ClientRooms() {
             {/* Similar card and carousel structure as above */}
             <div className="card mb-4">
               <Carousel>
-                {/* Add images to the carousel */}
-                {/* adding  room.imageURL or any other property that holds image URLs */}
                 <Carousel.Item>
                   <img
                     className="d-block w-100"
                     src={room.imageURL}
                     alt={`Standard Room ${room.roomNum}`}
                   />
-            
-                  
                 </Carousel.Item>
                 {/* kg ,  more Carousel.Item for additional images */}
               </Carousel>
               <div className="card-body">
                 <h5 className="card-title">Standard Room {room.roomNum}</h5>
                 <p className="card-text">{room.roomDescription}</p>
-                <button className="btn-checkRoom" onClick={()=> handleBooking(room.id , room.value)}>Book Room </button>
+                {/* <button className="btn-checkRoom" onClick={()=> handleBooking(room.id , room.value)}>Book Room </button> */}
               </div>
             </div>
           </div>
@@ -126,7 +129,7 @@ function ClientRooms() {
               <div className="card-body">
                 <h5 className="card-title">Deluxe Room {room.roomNum}</h5>
                 <p className="card-text">{room.roomDescription}</p>
-                <button className="btn-checkRoom" onClick={()=> handleBooking(room.id , room.value)}>Book Room </button>
+                {/* <button className="btn-checkRoom" onClick={()=> handleBooking(room.id , room.value)}>Book Room </button> */}
               </div>
             </div>
             

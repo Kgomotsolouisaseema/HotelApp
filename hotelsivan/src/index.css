@@ -1,4 +1,7 @@
 /* CSS FOR THE WHOLE PROJECT */
+/* In your main CSS file */
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
 
 body{
   /* background-image: url("./icons/Lobby\ Lounge.jpg"); */
@@ -24,6 +27,17 @@ body{
   width: 200px;
   height: 200px;
 }
+
+/* Registration page styles for passord icons*/
+.password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  /* transform: translateY(-50%); */
+  cursor: pointer;
+  font-size: 1rem; /* Adjust the font size */
+}
+
 /* 
 .facebook-icon {
   background-image: url('./icons/facebook.png');

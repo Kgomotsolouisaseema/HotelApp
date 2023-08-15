@@ -1,16 +1,41 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import Navbar from "./NavBar";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 // import GoogleMapComponent from "../GoogleMap"; // Import the GoogleMapComponent
 
 
 const ClientHome = () => {
+  const [rooms  ,setRooms] = useState([]);
+  console.log(rooms);
+  const navigate = useNavigate();
+
+
+
+  function handleCheck(e){
+    e.preventDefault()
+    const availableRooms = rooms.filter(room => room.available)
+    
+    if(availableRooms.length > 0){
+      const availableRoomNames = availableRooms.map(room => room.id).join(" ,");
+      alert(`Available rooms : ${availableRoomNames}`);
+      setRooms()
+      navigate('/rooms');
+    }else{
+      alert("No Available rooms")
+
+    } 
+  };
+
+
+
   return (
     <>   
    <Navbar/>
   <Container>  
- <form className="centered-form"> 
+ <form className="centered-form"  onSubmit={handleCheck}> 
   {/* Booking form for guests */}
   <div className="row">
     <div className="col-sm-6">
@@ -46,7 +71,7 @@ const ClientHome = () => {
       </div>
 
       <div className="form-group">
-        <button type="submit" className="submit-button">Book Now</button>
+        <button type="submit" className="submit-button" >Check Availability</button>
       </div>
     </div>
   </div>
