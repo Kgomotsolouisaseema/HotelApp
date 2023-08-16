@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import { getDocs, collection } from "firebase/firestore";
-import { Carousel } from "react-bootstrap"; // Import Bootstrap's Carousel component
-import { useNavigate } from "react-router-dom";
+import { Carousel} from "react-bootstrap"; // Import Bootstrap's Carousel component
+// import { useNavigate } from "react-router-dom";
+import Footer from "./Footer";
+import Navbar from "./NavBar";
 
 function ClientRooms() {
   // Fetch the 'roomTypes' collection data from Firestore
   const [rooms  ,setRooms] = useState([]);
   
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // Organize rooms into separate arrays based on their room types
   const economyRooms = rooms.filter((room) => room.room_type === "Economy");
@@ -24,7 +26,7 @@ function ClientRooms() {
         const roomSnapshot = await getDocs(collection(db, "roomTypes"));
         const roomData = roomSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         
-        console.log(roomData); //see on console what is happening when comp monuts
+        
         setRooms(roomData);
       } catch (error) {
         console.log("Error fetching rooms: ", error);
@@ -50,30 +52,44 @@ function ClientRooms() {
 
 
   return (
+    <>
+    <Navbar/>
     <div>
       <h2>Hotel Sivan Rooms</h2>
 
       {/* Display Economy Rooms */}
-      <h3>Economy Rooms</h3>
+      {/* <h3>Economy Rooms</h3> */}
       <div className="row">
         {economyRooms.map((room) => (
           <div className="col-md-4" key={room.id}>
             <div className="card mb-4">
               <Carousel>
-                {/* Add images to the carousel */}
-                {/* adding  room.imageURL or any other property that holds image URLs */}
+                
                 <Carousel.Item>
                   <img
                     className="d-block w-100"
                     src={room.imageURL}
                     alt={`Economy Room ${room.roomNum}`}
+                    id={"crlImg"}
                   />
                 </Carousel.Item>
+
+                {room.uploadedImages.map((image, index) => (
+                <Carousel.Item key={index}>
+                  <img
+                    className="d-block w-100"
+                    src={image}
+                    alt="room"
+                    id={"crlImg"}
+                  />
+                </Carousel.Item>
+                ))}
+               
                 {/* kg ,  more Carousel.Item for additional images */}
               </Carousel>
               <div className="card-body">
                 <h5 className="card-title">Economy Room {room.roomNum}</h5>
-                <p className="card-text">{room.roomDescription}</p>
+                {/* <p className="card-text">{room.roomDescription}</p> */}
                 {/* <button className="btn-checkRoom" onClick={()=> handleBooking(room.id , room.value)}>Book Room </button> */}
               </div>
             </div>
@@ -82,11 +98,11 @@ function ClientRooms() {
       </div>
 
       {/* Display Standard Rooms */}
-      <h3>Standard Rooms</h3>
+      {/* <h3>Standard Rooms</h3> */}
       <div className="row">
         {standardRooms.map((room) => (
           <div className="col-md-4" key={room.id}>
-            {/* Similar card and carousel structure as above */}
+          
             <div className="card mb-4">
               <Carousel>
                 <Carousel.Item>
@@ -94,41 +110,63 @@ function ClientRooms() {
                     className="d-block w-100"
                     src={room.imageURL}
                     alt={`Standard Room ${room.roomNum}`}
+                    id={"crlImg"}
                   />
                 </Carousel.Item>
-                {/* kg ,  more Carousel.Item for additional images */}
+                {room.uploadedImages.map((image, index) => (
+                <Carousel.Item key={index}>
+                  <img
+                    className="d-block w-100"
+                    src={image}
+                    alt="room"
+                    id={"crlImg"}
+                  />
+                </Carousel.Item>
+                ))}
+                
               </Carousel>
               <div className="card-body">
                 <h5 className="card-title">Standard Room {room.roomNum}</h5>
-                <p className="card-text">{room.roomDescription}</p>
+                {/* <p className="card-text">{room.roomDescription}</p> */}
                 {/* <button className="btn-checkRoom" onClick={()=> handleBooking(room.id , room.value)}>Book Room </button> */}
               </div>
             </div>
           </div>
         ))}
       </div>
-
-      {/* Display Deluxe Rooms */}
-      <h3>Deluxe Rooms</h3>
+      {/* <h3>Deluxe Rooms</h3> */}
       <div className="row">
         {deluxeRooms.map((room) => (
           <div className="col-md-4" key={room.id}>
             <div className="card mb-4">
               <Carousel>
-                {/* Add images to the carousel */}
-                {/* adding  room.imageURL or any other property that holds image URLs */}
+         
                 <Carousel.Item>
                   <img
                     className="d-block w-100"
                     src={room.imageURL}
                     alt={`Deluxe Room ${room.roomNum}`}
+                    id={"crlImg"}
                   />
                 </Carousel.Item>
-                {/* kg ,  more Carousel.Item for additional images */}
+                {room.uploadedImages.map((image, index) => (
+                <Carousel.Item key={index}>
+                  <img
+                    className="d-block w-100"
+                    src={image}
+                    alt="room"
+                    id={"crlImg"}
+                  />
+                </Carousel.Item>
+                ))}
+           
               </Carousel>
               <div className="card-body">
                 <h5 className="card-title">Deluxe Room {room.roomNum}</h5>
                 <p className="card-text">{room.roomDescription}</p>
+                <p className="card-text">{room.roomNum}</p>
+                <p className="card-text">{room.price}</p>
+                <p className="card-text">{room.totalOccupants}</p>
                 {/* <button className="btn-checkRoom" onClick={()=> handleBooking(room.id , room.value)}>Book Room </button> */}
               </div>
             </div>
@@ -137,6 +175,8 @@ function ClientRooms() {
         ))}
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
 

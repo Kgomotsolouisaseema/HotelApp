@@ -3,7 +3,7 @@
 }
 
 .footer{
-    background-color: rgb(248, 145, 10);
+    background-color: rgb(248, 117, 10);
     /* position: absolute;
     bottom: 0;
     left: 0;
@@ -68,8 +68,8 @@ a{
 }
  /* social media icons */
 .sb_footer-links div{
-    font-size: 10px;
-    line-height: 10px;
+    font-size: 15px;
+    line-height: 12px;
     margin: 0.5rem 0;
     cursor: pointer;
 }
@@ -78,7 +78,7 @@ a{
     flex-direction: row;
 }
 .sb_footer_below-links p{
-    font-size: 13px;
+    font-size: 14px;
     line-height: 15px;
     margin-left: 2rem;
     color: white;

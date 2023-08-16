@@ -24,7 +24,7 @@ function Footer() {
               </a>
             </div>
             <div className="sb_footer-links_div">
-              <h4>Resources</h4>
+              <h4> Resources </h4>
               <a href="/resource">
                 <p>Resource Center </p>
               </a>
@@ -54,7 +54,7 @@ function Footer() {
               </a>
             </div>
             <div className="sb_footer-links div">
-              <h4>Coming Soon</h4>
+              <h4>Socials </h4>
               <div className="socialmedia">
                 <table>
                   <tbody>

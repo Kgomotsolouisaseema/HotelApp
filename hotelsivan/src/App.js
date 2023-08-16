@@ -6,6 +6,7 @@ import Booking from "./components/Booking";
 import NewRoom from "./components/NewRoom";
 import Login from "./components/Login";
 import Registration from "./components/Registration";
+// import MainImage from './MainImage';
 
 function App() {
   const [userEmail , setUserEmail ]=useState("")
