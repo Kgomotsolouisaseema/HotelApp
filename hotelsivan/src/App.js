@@ -6,6 +6,7 @@ import Booking from "./components/Booking";
 import NewRoom from "./components/NewRoom";
 import Login from "./components/Login";
 import Registration from "./components/Registration";
+import Amenities from "./components/Amenities"
 // import MainImage from './MainImage';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
   
   return (
     <>
+    {/* <Amenities/> */}
    
     <Router>
       <Routes>

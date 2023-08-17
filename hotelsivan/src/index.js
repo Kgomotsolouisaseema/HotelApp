@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
+// import Modal from "react-modal";
 import "bootstrap/dist/js/bootstrap.bundle.min.js"; // Add this line to import Bootstrap JavaScript
 
 // import { BrowserRouter as Router } from "react-router-dom";
 import { BrowserRouter} from "react-router-dom";
 
 // import 'dotenv/config'
+// Modal.setAppElement(document.getElementById('root'));
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

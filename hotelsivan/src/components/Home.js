@@ -6,6 +6,7 @@ import { useState } from "react";
 import Footer from "./Footer";
 import MainImage from "./MainImage";
 import GoogleMapComponent from "./GoogleMap"; // Import the GoogleMapComponent
+import Amenities from "./Amenities";
 
 const ClientHome = () => {
   const [rooms, setRooms] = useState([]);
@@ -37,10 +38,11 @@ const ClientHome = () => {
       <Container>
      
         <form className="centered-form" onSubmit={handleCheck}>
+          {/* <h2>Check Available Rooms :</h2> */}
           {/* Booking form for guests */}
           <div className="row">
             <div className="col-sm-6">
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <input
                   type="text"
@@ -48,8 +50,8 @@ const ClientHome = () => {
                   name="name"
                   className="form-input"
                 />
-              </div>
-
+              </div> */}
+{/* 
               <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <input
@@ -58,8 +60,8 @@ const ClientHome = () => {
                   name="email"
                   className="form-input"
                 />
-              </div>
-              <div className="form-group">
+              </div> */}
+              {/* <div className="form-group">
                 <label htmlFor="guests">Number of Guests</label>
                 <input
                   type="number"
@@ -67,10 +69,10 @@ const ClientHome = () => {
                   name="guests"
                   className="form-input"
                 />
-              </div>
+              </div> */}
             </div>
 
-            <div className="col-sm-6">
+            <div className="row-sm-10">
               <div className="form-group">
                 <label htmlFor="check-in">Check-in Date</label>
                 <input
@@ -102,10 +104,11 @@ const ClientHome = () => {
         
       </Container>
       <br/>
+      <Amenities/>
+      
+      <br/>
       <GoogleMapComponent />
       <br/>
-     
-      
       <Footer />
     </>
   );

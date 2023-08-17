@@ -5,7 +5,7 @@ import 'firebase/firestore';
 import { getFirestore } from 'firebase/firestore';
 import {getAnalytics} from "firebase/analytics"
 import { getStorage } from 'firebase/storage';
-// console.log(process.env.REACT_APP_FIREBASE_API_KEY)
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBmxTWGRwTyUOjNOfC7svmPu-vbDupXSz4",

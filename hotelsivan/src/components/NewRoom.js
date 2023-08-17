@@ -3,7 +3,7 @@ import { db } from "./firebase";
 // function from Firebase Storage to get the download URL of an uploaded file.
 import { getDownloadURL } from "firebase/storage";
 // Import collection and addDoc functions from Firebase Firestore to add documents to a collection.
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc , deleteDoc , doc } from "firebase/firestore";
 // functions from Firebase Storage to upload files.
 import { ref, uploadBytes } from "firebase/storage";
 
@@ -113,6 +113,18 @@ const NewRoom = () => {
       }
     };
  
+
+    //Deleting Rooms according thier ID 
+    const deleteRoom = document.querySelector('.delete')
+    deleteRoom.addEventListener('submit' ,(e) => {
+      e.preventDefault()
+
+      const docRef = doc(db , 'roomType' ,deleteRoom.id.value)
+      deleteDoc(docRef)
+      .then(()=>{
+        deleteRoom.reset()
+      })
+    })
 
   const handleNewRoom = async (e) => {
     e.preventDefault();
@@ -233,7 +245,20 @@ const NewRoom = () => {
           SAVE NEW ROOM
         </button>
       </div>
+     
+      <div className="container mt-5">
+    <form class="delete">
+        <div class="form-group">
+            <label for="id">Room ID :</label>
+            <input type="text" class="form-control" name="id" required />
+        </div>
+        <button class="btn btn-danger">Delete Room</button>
+    </form>
+    </div>
+     
     </div>
   ); 
 };
 export default NewRoom;
+
+

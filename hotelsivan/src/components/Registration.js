@@ -34,6 +34,7 @@ function Login({ setUserEmail }) {
       .then((userCredentials) => {
         console.log(userCredentials);
         setUserEmail(userCredentials.user.email);
+        
         navigate("/Home");
 
         Swal.fire({

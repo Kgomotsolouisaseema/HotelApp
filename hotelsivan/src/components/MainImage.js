@@ -6,8 +6,7 @@ import chefimage from "../assets/MainImages/chefimage.jpg";
 import littleBoyPool from "../assets/MainImages/LittleBoyPool.jpg";
 import lounge from "../assets/MainImages/Lounge.jpg";
 
-import "../index.css"
-
+import "../index.css";
 
 function MainImage() {
   const carImages = [building, chefimage, littleBoyPool, lounge];
@@ -21,7 +20,7 @@ function MainImage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((activeIndex + 1) % carImages.length);
-    }, 2000);
+    }, 10000);
 
     return () => {
       clearInterval(interval);
@@ -30,17 +29,25 @@ function MainImage() {
 
   return (
     <div className="slider">
-    <Carousel activeIndex={activeIndex} onSelect={handleSelect}>
-      {carImages.map((image, index) => (
-        <Carousel.Item key={index}>
-          <img className="d-block w-100" src={image} alt={"Slide ${index}"}  id={"mainIMG"}/>
-          <div className="overlay-text">
-            <h4><span>Sivan Hotel</span></h4>
-            <p>Hotel and Resorts </p>
-          </div>
-        </Carousel.Item>
-      ))}
-    </Carousel>
+      <Carousel activeIndex={activeIndex} onSelect={handleSelect}>
+        {carImages.map((image, index) => (
+          <Carousel.Item key={index}>
+            <img
+              className="d-block w-100"
+              src={image}
+              alt={"Slide ${index}"}
+              id={"mainIMG"}
+            />
+          </Carousel.Item>
+        ))}
+      </Carousel>
+      <div className="overlay-text">
+        
+        <h4>
+          <span>Sivan Hotel</span>
+        </h4>
+        <p>Hotel and Resorts </p>
+      </div>
     </div>
   );
 }
