@@ -91,6 +91,12 @@ display: -webkit-box;
 -webkit-box-orient: vertical;
 overflow: hidden;
 }
+
+/* book form img*/
+.imgurl{
+  width: 50%;
+  
+}
 /* 
 .facebook-icon {
   background-image: url('./icons/facebook.png');

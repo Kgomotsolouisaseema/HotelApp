@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { db } from "./firebase";
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, collection ,  } from "firebase/firestore";
 import { Carousel } from "react-bootstrap"; // Import Bootstrap's Carousel component
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Footer from "./Footer";
 import Navbar from "./NavBar";
 
 // imports for the modal Roomdetails
-import Modal from "react-modal";
+// import Modal from "react-modal";
 import "firebase/firestore"; // Import Firestore
 import Roomdetails from "./Roomdetails";
 
@@ -15,14 +16,21 @@ import Roomdetails from "./Roomdetails";
 function Rooms() {
   // Fetch the 'roomTypes' collection data from Firestore
   const [rooms, setRooms] = useState([]);
+  
 
+  //DATES
+  const location = useLocation(); //useLocation hook to get the current location and locate the rooms object
+  const queryParams = new URLSearchParams(location.search);
+  const arrivalDate = queryParams.get("arrival");
+  const departureDate = queryParams.get("departure");
+// console.log(arrivalDate , departureDate)
   //states that handle modal fir room details
   const [roomsData, setRoomsData] = useState([]);
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  // const [modalIsClosed, setModalIsClosed] = useState(true);
 
-  // const navigate = useNavigate();
+
+  const navigate = useNavigate();
 
   // Organize rooms into separate arrays based on their room types
   const economyRooms = rooms.filter((room) => room.room_type === "Economy");
@@ -76,6 +84,19 @@ function Rooms() {
     setModalIsOpen(false);
     // setModalIsClosed(true);
   };
+
+  //handle booking function 
+  function handleBooking(id){
+    const filteredRooms = rooms.filter(function(room){
+      return room.id;
+    })
+    const room =filteredRooms[0];
+
+    console.log("room data :" , room);
+    // navigate('/booking' , {state: {room :room}})
+    navigate(`/booking?arrival=${arrivalDate}&departure=${departureDate}`,{state: {room :room}} );
+    console.log(room);
+  }
 
   return (
     <>
