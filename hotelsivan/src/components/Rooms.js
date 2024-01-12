@@ -147,7 +147,7 @@ function Rooms() {
                     </Carousel.Item>
                   ))}
 
-                  {/* kg ,  more Carousel.Item for additional images */}
+                  
                 </Carousel>
                 <div className="card-body">
                   <h5 className="card-title">Economy Room {room.roomNum}</h5>
@@ -200,7 +200,7 @@ function Rooms() {
                   <p className="card-text">{room.price}</p>
                   {/* <p className="card-text">{room.totalOccupants}</p> */}
                   <button onClick={() => openModal(room)}>View Details </button>
-                  {/* <button className="btn-checkRoom" onClick={()=> handleBooking(room.id , room.value)}>Book Room </button> */}
+                  <button className="btn-checkRoom" onClick={()=> handleBooking(room.id , room.value)}>Book Room </button>
                 </div>
               </div>
             </div>
@@ -238,7 +238,7 @@ function Rooms() {
                   <p className="card-text">{room.price}</p>
                   {/* <p className="card-text">{room.totalOccupants}</p> */}
                   <button onClick={() => openModal(room)}>View Details </button>
-                  {/* <button className="btn-checkRoom" onClick={()=> handleBooking(room.id , room.value)}>Book Room </button> */}
+                  <button className="btn-checkRoom" onClick={()=> handleBooking(room.id , room.value)}>Book Room </button>
                 </div>
               </div>
             </div>

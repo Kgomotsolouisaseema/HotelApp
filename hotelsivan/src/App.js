@@ -4,11 +4,9 @@ import Home from "./components/Home";
 import Rooms from "./components/Rooms";
 import Booking from "./components/Booking";
 import NewRoom from "./components/NewRoom";
-import Login from "./components/Login";
+// import Login from "./components/Login";
 import Registration from "./components/Registration";
-// import Amenities from "./components/Amenities";
-// import FilterRooms from "./components/FilterRooms";
-// import MainImage from './MainImage';
+import SignInSide from "./components/SignInSide";
 
 function App() {
   const [userEmail, setUserEmail] = useState("");
@@ -24,13 +22,13 @@ function App() {
 
       <Router>
         <Routes>
-          <Route exact path="/" element={<Home />} />
+           <Route exact path="/home" element={<Home />} />
 
           <Route
             path="/login"
-            element={<Login setUserEmail={(email) => setUserEmail(email)} />}
-          />
-
+            element={<SignInSide setUserEmail={(email) => setUserEmail(email)} />}
+          /> 
+           {/* <Route path="/sign" element={<SignInSide />} /> */}
           <Route path="/rooms" element={<Rooms />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/booking" element={<Booking />} />

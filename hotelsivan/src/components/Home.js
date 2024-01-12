@@ -106,7 +106,7 @@ function handleCheck(e ) {
           {/* Booking form for guests */}
           <div className="row">
 
-            <div className="row-sm-10">
+            <div className="second">
               <div className="form-group">
                 <label htmlFor="check-in">Check-in Date</label>
                 <input

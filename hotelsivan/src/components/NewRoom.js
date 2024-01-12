@@ -115,16 +115,23 @@ const NewRoom = () => {
  
 
     //Deleting Rooms according thier ID 
-    const deleteRoom = document.querySelector('.delete')
-    deleteRoom.addEventListener('submit' ,(e) => {
-      e.preventDefault()
+    const deleteroom = ()=>{
+      const deleteRoom = document.querySelector('.delete');
+    deleteRoom.addEventListener('submit',(e) => {
+      e.preventDefault();
 
-      const docRef = doc(db , 'roomType' ,deleteRoom.id.value)
+      const docRef = doc(db , 'roomTypes' ,deleteRoom.id.value)
       deleteDoc(docRef)
       .then(()=>{
         deleteRoom.reset()
       })
-    })
+      .catch((error)=>{
+        console.error("error on delete function" , error)
+      });
+    });
+
+    }
+    
 
   const handleNewRoom = async (e) => {
     e.preventDefault();
@@ -252,7 +259,7 @@ const NewRoom = () => {
             <label for="id">Room ID :</label>
             <input type="text" class="form-control" name="id" required />
         </div>
-        <button class="btn btn-danger">Delete Room</button>
+        <button class="btn btn-danger"onClick={deleteroom}>Delete Room</button>
     </form>
     </div>
      

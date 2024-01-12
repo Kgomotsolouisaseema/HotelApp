@@ -20,7 +20,7 @@ function MainImage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((activeIndex + 1) % carImages.length);
-    }, 10000);
+    }, 5000);
 
     return () => {
       clearInterval(interval);
