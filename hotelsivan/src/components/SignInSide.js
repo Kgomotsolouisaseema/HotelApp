@@ -19,6 +19,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 
 import Swal from "sweetalert2";
+import HotelLogo from "../icons/HotelLogo.png"
 
 function Copyright(props) {
   return (
@@ -66,7 +67,7 @@ export default function SignInSide({setUserEmail }) {
         );
   
         setUserEmail(userCredentials.user.email);
-        navigate('/Home');
+        navigate('/');
   
         Swal.fire({
           icon: 'success',
@@ -99,8 +100,15 @@ export default function SignInSide({setUserEmail }) {
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
             backgroundSize: 'cover',
             backgroundPosition: 'center',
+            backgroundColor: "#fff"
           }}
         />
+          {/* <img
+            src={HotelLogo}
+            alt="Logo"
+            style={{ width: "100%", maxWidth: "500px" }}
+          /> */}
+
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
